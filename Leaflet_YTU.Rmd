@@ -1,0 +1,68 @@
+---
+title: "R Markdown and Leaflet project"
+author: "Yuling Tu"
+date: "January 17, 2018"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Federal Reserve Banks 
+
+This R Markdown presentation present location and websites for 12 Federal Reserve Banks along with Board of Governors of the Federal Reserve System.  
+
+###01-Boston         02-New York     03-Philadelphia
+###04-Cleveland      05-Richmond     06-Atlanta
+###07-Chicago        08-St. Louis    09-Minneapolis
+###10-Kansas City    11-Dallas       12-San Francisco
+###13-Board of Governors of the Federal Reserve System
+
+All information in those slides is public data.  
+
+
+## Federal Reserve Banks Map
+
+```{r date, echo = FALSE}
+suppressWarnings(suppressPackageStartupMessages(library(shiny)))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
+suppressWarnings(suppressPackageStartupMessages(library(leaflet)))
+Today <- format(Sys.time(), "%A %B %d, %Y")
+```
+
+### `r Today`
+
+```{r map, echo=FALSE}
+frb <- data.frame(
+  lat = c(42.352733, 40.708366, 39.953544, 41.501959, 37.535518, 33.782373, 41.878476, 38.628561, 44.98445, 39.074961, 32.79148, 37.793608, 38.892109),
+  lng = c(-71.053642, -74.008653, -75.150028, -81.690283, -77.440677, -84.383949, -87.633007, -90.187779, -93.267381, -94.586245, -96.800561, -122.395761, -77.044935))
+
+website <- c(
+  "<a href='https://www.bostonfed.org/'>Federal Reserve Bank of Boston</a>",
+  "<a href='https://www.newyorkfed.org/'>Federal Reserve Bank of New York</a>",
+  "<a href='https://www.philadelphiafed.org/'>Federal Reserve Bank of Philadelphia</a>",
+  "<a href='https://www.clevelandfed.org/'>Federal Reserve Bank of Cleveland </a>",
+  "<a href='https://www.richmondfed.org/'>Federal Reserve Bank of Richmond</a>",
+  "<a href='https://www.frbatlanta.org/'>Federal Reserve Bank of Atlanta</a>",
+  "<a href='https://www.chicagofed.org/'>Federal Reserve Bank of Chicago</a>",
+  "<a href='https://www.stlouisfed.org/'>Federal Reserve Bank of St. Louis</a>",
+  "<a href='https://www.minneapolisfed.org/'>Federal Reserve Bank of Minneapolis</a>",
+  "<a href='https://www.kansascityfed.org/'>Federal Reserve Bank of Kansas City</a>",
+  "<a href='https://www.dallasfed.org/'>Federal Reserve Bank of Dallas</a>",
+  "<a href='http://www.frbsf.org/'>Federal Reserve Bank of San Francisco</a>",
+  "<a href='https://www.federalreserve.gov/'>Board of Governors of the Federal Reserve System</a>"
+)
+
+frbmap <- frb %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup = website)
+
+frbmap
+```
+
+
+
