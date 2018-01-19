@@ -11,9 +11,9 @@ Two files are commited for this assignment.
 Tip from Michael Crump  -- https://www.michaelcrump.net/how-to-run-html-files-in-your-browser-from-github/
 
 html file link from github
-https://github.com/<your user name>/<your repo>/blob/master/index.html
+https://github.com/ytu95035/Data_Product/blob/master/index.html
 
 Put it as in the following format:
-https://rawgit.com/<your user name>/<your repo>/master/index.html
+https://rawgit.com/ytu95035/Data_Product/master/index.html
   or 
-https://cdn.rawgit.com/<your user name>/<your repo>/master/index.html
+https://cdn.rawgit.com/ytu95035/Data_Product/master/index.html
