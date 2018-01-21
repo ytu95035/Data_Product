@@ -1,0 +1,42 @@
+---
+title: "R Markdown and Plotly Project"
+author: "Yuling Tu"
+date: "January 20, 2018"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plotly Geyser 3D Surface Chart
+
+```{r date, echo = FALSE}
+suppressWarnings(suppressPackageStartupMessages(library(shiny)))
+suppressWarnings(suppressPackageStartupMessages(library(plotly)))
+Today <- format(Sys.time(), "%A %B %d, %Y")
+```
+
+### `r Today`
+
+```{r chart, echo=FALSE}
+# load MASS for geyser data
+suppressWarnings(suppressPackageStartupMessages(library(MASS)))
+# use Two-Dimensional Kernel Density Estimation on geyser data
+f1 <- kde2d(geyser$duration, geyser$waiting, n=100)
+plot_ly(x=f1$x, y=f1$y, z=f1$z, type = "surface") 
+
+```
+
+## Plotly Time Series Similation Chart
+
+### `r Today`
+
+```{r line, warning=FALSE}
+nowt <- as.POSIXlt(Sys.time())
+tm <- seq(0, 600, by = 10)
+x <- nowt - tm
+y <- rnorm(length(x))
+plot_ly(x = ~x, y = ~y, type="scatter", mode = 'lines', text = paste(tm, "seconds from now"))
